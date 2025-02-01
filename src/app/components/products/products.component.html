@@ -1,0 +1,72 @@
+<main id="main">
+
+	<!-- ======= Breadcrumbs ======= -->
+	<section class="breadcrumbs">
+		<div class="container">
+
+			<div class="d-flex justify-content-between align-items-center">
+				<h2>Produits</h2>
+				<ol>
+					<li>Accueil</li>
+					<li><a routerLink="products">Produits</a></li>
+				</ol>
+			</div>
+
+		</div>
+	</section><!-- End Breadcrumbs -->
+
+
+	<!-- ======= Section Produits ======= -->
+	<div class="container">
+		<div class="row">
+			<!-- Colonne Catégories -->
+			<aside class="col-md-3 mb-4">
+				<div class="categories p-3 shadow-sm rounded">
+					<h4 class="mb-3">Catégories</h4>
+					<ul class="list-group">
+						<li class="list-group-item" *ngFor="let category of categories">
+							<a href="#" class="text-decoration-none">{{ category }}</a>
+						</li>
+					</ul>
+				</div>
+			</aside>
+
+			<!-- Section Produits -->
+			<div class="col-md-9">
+				<div class="row">
+					<div class="col-md-4 mb-4" *ngFor="let product of products">
+						<div class="product-card card shadow-sm">
+							<div class="product-image">
+								<img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}">
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">{{ product.name }}</h5>
+								<p class="card-text">{{ product.description }}</p>
+								<div class="d-flex justify-content-between align-items-center">
+									<span class="fw-bold">{{ product.price }} €</span>
+									<div class="call-to-action">
+										<button class="btn btn-sm btn-primary me-2" (click)="addToCart(product)">
+											<i class="fas fa-shopping-cart"></i> Ajouter au Panier
+										</button>
+										<a [routerLink]="['/detail', product.id]" class="btn btn-sm btn-secondary">
+											<i class="fas fa-info-circle"></i> Détails
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+
+	<!-- ======= Fin Section Produits ======= -->
+
+
+
+
+</main><!-- End #main -->

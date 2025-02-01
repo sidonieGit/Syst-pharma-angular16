@@ -1,0 +1,378 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Redressed&display=swap");
+
+:root {
+  --color-white: #ffffff;
+  --color-primary: #8338ec;
+  --color-primary1: #06d42c;
+  --color-gray: #f3f4f6;
+  --color-secondary: #fb5607;
+  --color-black: #222222;
+  --color-gray-dark: #b9b9b9;
+  --color-gray-danger: #ff006e;
+  --font-base: "Merriweather";
+  --font-header: "Redressed";
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+}
+h1,
+h2 {
+  text-align: center;
+  color: var(--color-primary1) !important;
+}
+.primary1 {
+  color: var(--color-primary1) !important;
+}
+.bandef {
+  white-space: nowrap;
+  overflow: hidden;
+  visibility: visible;
+  width: 100vw; /* La largeur de la fenêtre pour garantir que le texte ne soit pas caché */
+  position: relative;
+}
+
+.bandef h1 {
+  display: inline-block; /* Pour que le texte reste sur une seule ligne lors du défilement */
+  padding-left: 100%; /* Ajoute un espace initial pour que le texte démarre hors de la vue */
+  -webkit-animation: marquee 20s linear infinite;
+  animation: marquee 20s linear infinite;
+}
+
+@-webkit-keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  } /* Commence le texte à droite de l'écran */
+  100% {
+    transform: translateX(-100%);
+  } /* Le texte sort par la gauche */
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.container1 {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #010610, #c5c0c6);
+  padding: 10px;
+}
+
+.redressed {
+  font-family: "Redressed", cursive;
+}
+.merriweather {
+  font-family: "Merriweather", serif;
+}
+
+.cc-navbar {
+  background-color: rgba(0, 0, 0, 0.55); /* Correction ici avec rgba */
+  font-family: "Merriweather", serif;
+  box-shadow: 1px 1px 3px rgba(255, 255, 255, 0.54);
+  z-index: 99;
+}
+
+.cc-navbar .nav-link {
+  border-bottom: 1px solid transparent;
+  transition: padding-bottom 0.4s ease-out, border-color 0.3s ease;
+}
+
+/*--------------------------------------------------------------
+# Breadcrumbs
+--------------------------------------------------------------*/
+.breadcrumbs {
+  padding: 15px 0;
+  background: #f6f6f7;
+  margin-top: 100px;
+}
+.breadcrumbs h2 {
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 400;
+}
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+}
+.breadcrumbs ol li + li {
+  padding-left: 10px;
+}
+.breadcrumbs ol li + li::before {
+  display: inline-block;
+  padding-right: 10px;
+  color: #4f4c55;
+  content: "/";
+}
+@media (max-width: 768px) {
+  .breadcrumbs .d-flex {
+    display: block !important;
+  }
+  .breadcrumbs ol {
+    display: block;
+  }
+  .breadcrumbs ol li {
+    display: inline-block;
+  }
+}
+
+/*--------------------------------------------------------------
+# Sections General
+--------------------------------------------------------------*/
+section {
+  padding: 60px 0;
+  overflow: hidden;
+}
+
+.section-bg {
+  background-color: #f6f6f7;
+}
+
+.section-title {
+  padding-bottom: 30px;
+}
+.section-title h2 {
+  font-size: 32px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  position: relative;
+  color: #940099;
+  text-align: left;
+}
+.section-title h2::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #990099;
+  bottom: 0;
+  left: 0;
+}
+.section-title p {
+  margin-bottom: 0;
+}
+
+/*--------------------------------------------------------------
+# About
+--------------------------------------------------------------*/
+/* .about .content h2 {
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 60px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.about .content h3 {
+  font-weight: 500;
+  line-height: 32px;
+  font-size: 24px;
+}
+.about .content ul {
+  list-style: none;
+  padding: 0;
+}
+.about .content ul li {
+  padding: 10px 0 0 28px;
+  position: relative;
+}
+.about .content ul i {
+  left: 0;
+  top: 7px;
+  position: absolute;
+  font-size: 20px;
+  color: #990099;
+}
+.about .content p:last-child {
+  margin-bottom: 0;
+} */
+
+/*---end about section -----------------------------------------------------------*/
+
+.order-form,
+.contactForm {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("assets/images/banner.jpg");
+  background-size: cover;
+  height: 100px;
+}
+.order-form {
+  height: 500px;
+}
+
+button a {
+  text-decoration: none;
+  color: var(--color-gray) !important;
+}
+.contactForm {
+  height: 400px;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+}
+/* Style pour les champs valides */
+input:valid,
+select:valid,
+textarea:valid {
+  border-color: #28a745; /* Vert pour indiquer la validation */
+  box-shadow: 0 0 5px rgba(40, 167, 69, 0.5); /* Ombre verte pour effet */
+}
+
+/* Style pour les champs invalides */
+input:invalid,
+select:invalid,
+textarea:invalid {
+  border-color: #dc3545; /* Rouge pour indiquer l'invalidation */
+  box-shadow: 0 0 5px rgba(220, 53, 69, 0.5); /* Ombre rouge pour effet */
+}
+
+/* Style pour les messages d'erreur */
+.msg {
+  color: #dc3545; /* Rouge pour indiquer l'erreur */
+  font-size: 0.875rem; /* Taille de police plus petite */
+  margin-top: 5px; /* Un peu d'espace au-dessus du message */
+  display: block; /* Affiche le message en tant que bloc pour qu'il prenne toute la largeur */
+}
+
+/* Exemple de style pour le label qui affiche l'erreur */
+.invalid + .msg {
+  color: #dc3545; /* Assurez-vous que le message d'erreur est visible */
+}
+
+.banner .banner-desc {
+  font-size: 48px;
+  font-weight: 400px;
+  color: #fff;
+  margin-top: 200px;
+}
+.cc-menu {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), #00000080),
+    url(../assets/img/banner3.jpg) center center fixed no-repeat;
+  background-size: cover;
+  height: 1500px;
+}
+
+/* Hover effect */
+.cc-navbar .nav-link:hover {
+  padding-bottom: 20px;
+  border-bottom-color: var(--bs-teal);
+}
+
+.btn-order {
+  color: var(--bs-teal) !important;
+  border-color: var(--bs-teal) !important;
+  transition: 0.5s;
+}
+
+.btn-order:hover,
+.btn-order:active {
+  color: #fff;
+  background-color: var(--color-primary1) !important;
+}
+/* merci */
+
+#merci,
+#mercii {
+  padding-top: 100px;
+}
+
+.product-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+
+.product-card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+}
+
+.product-card .card-body {
+  text-align: center;
+}
+
+.product-card .btn {
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.product-card .btn-secondary {
+  background-color: #6c757d;
+}
+
+/* Footer */
+.container-footer {
+  position: fixed; /* Pour que le footer reste en bas de page */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--color-black);
+  color: var(--color-primary);
+  font-family: var(--font-base);
+  padding: 20px;
+  text-align: center; /* Centrage du contenu du footer */
+}
+
+.blinking-button {
+  animation: blinking 1s infinite;
+}
+
+/*--------------------------------------------------------------
+# Back to top button
+--------------------------------------------------------------*/
+.back-to-top {
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  right: 15px;
+  bottom: 15px;
+  z-index: 996;
+  background: #990099;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  transition: all 0.4s;
+}
+.back-to-top i {
+  font-size: 28px;
+  color: #fff;
+  line-height: 0;
+}
+.back-to-top:hover {
+  background: #00c28e;
+  color: #fff;
+}
+.back-to-top.active {
+  visibility: visible;
+  opacity: 1;
+}
+@keyframes blinking {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}

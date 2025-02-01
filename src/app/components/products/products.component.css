@@ -1,0 +1,30 @@
+/* Style général pour la carte produit */
+.product-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+  position: relative;
+}
+
+.product-card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+}
+
+/* Style pour les boutons Panier et Détails */
+.call-to-action {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+/* Afficher les boutons au survol de .product-card */
+.product-card:hover .call-to-action {
+  visibility: visible;
+  opacity: 1;
+}

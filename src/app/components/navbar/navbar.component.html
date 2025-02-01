@@ -1,0 +1,108 @@
+<!-- Livraison gratuite -->
+<div class="text-dark text-center py-2">
+	<span>Livraison gratuite pour toute commande supérieure à 50€</span>
+</div>
+
+<!-- Navbar -->
+<div class="text-dark text-center py-2">
+	<nav class="cc-navbar navbar navbar-expand-lg position-fixed w-100 navbar-dark bg-dark shadow-lg">
+		<div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
+			<!-- Brand -->
+			<a class="navbar-brand text-uppercase fw-bold mb-2 mb-md-0" routerLink="/">
+				<span class="d-none d-md-inline">Système de Pharmacie</span>
+				<span class="d-md-none">SystPharma</span>
+			</a>
+
+			<!-- Barre de recherche -->
+			<div class="mx-auto d-flex align-items-center">
+				<input type="text" class="form-control typing-effect" id="search" placeholder="Rechercher un médicament..."
+					aria-label="Search" />
+				<button class="btn btn-outline-light ms-2" type="button">
+					<i class="fas fa-search"></i>
+				</button>
+			</div>
+
+			<!-- Section droite -->
+			<ul class="navbar-nav d-flex align-items-center">
+
+				<!-- Profil connecté avec ngbDropdown -->
+				<li class="nav-item dropdown" *ngIf="isLoggedIn" ngbDropdown>
+					<a class="nav-link dropdown-toggle primary1" id="profileDropdown" role="button" ngbDropdownToggle>
+						<i class="bi bi-person-circle"></i> Bonjour, {{ UserFirstName }}
+					</a>
+					<div class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown" ngbDropdownMenu>
+						<a class="dropdown-item" routerLink="/profile">
+							<i class="bi bi-person"></i> Mon profil
+						</a>
+						<a class="dropdown-item" routerLink="/orders">
+							<i class="bi bi-basket"></i> Mes commandes
+						</a>
+						<hr class="dropdown-divider">
+						<button class="dropdown-item text-danger" (click)="logout()">
+							<i class="bi bi-box-arrow-right"></i> Déconnexion
+						</button>
+					</div>
+				</li>
+
+
+				<!-- Panier -->
+				<li class="nav-item">
+					<button class="btn btn-outline-light primary1 position-relative mx-2" data-bs-toggle="modal"
+						data-bs-target="#cartModal">
+						<i class="fas fa-shopping-cart"></i>
+						<span class="d-none d-lg-inline ms-1">Panier</span>
+						<span *ngIf="cartTotalQuantity > 0"
+							class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-dark">
+							{{ cartTotalQuantity }}
+						</span>
+					</button>
+				</li>
+
+				<!-- Connexion (Desktop) -->
+				<li class="nav-item d-none d-lg-block" *ngIf="!isLoggedIn">
+					<a routerLink="/login" class="btn btn-outline-light primary1 mx-2">
+						<i class="fas fa-user"></i> Mon compte
+					</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</div>
+
+<!-- Notification de la pharmacie sélectionnée -->
+<div class="alert alert-info text-center" *ngIf="currentPharmacyName">
+	<strong>Commande en cours auprès de :</strong> {{ currentPharmacyName }}
+</div>
+
+<!-- Navbar -->
+
+
+<!-- Modal Panier -->
+<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Votre Panier</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+			<div class="modal-body">
+				<ul class="list-group">
+					<li *ngFor="let item of cartItems" class="list-group-item">
+						{{ item.name }} - {{ item.price }}€ x {{ item.quantity }}
+						<button class="btn btn-sm btn-danger" (click)="removeItem(item.id)">✖</button>
+					</li>
+				</ul>
+				<h6 class="mt-3">Total : {{ cartTotal }} €</h6>
+			</div>
+			<div class="modal-footer">
+				<button *ngIf="isLoggedIn && cartItems.length > 0" class="btn btn-success"
+					(click)="commander()">Commander</button>
+				<button *ngIf="!isLoggedIn && cartItems.length > 0" class="btn btn-primary" (click)="redirectToLogin()">Se
+					connecter</button>
+				<button *ngIf="cartItems.length === 0" class="btn btn-primary" (click)="redirectToProducts()">Ajouter des
+					produits</button>
+				<button class="btn btn-secondary" (click)="clearCart()">Vider le panier</button>
+			</div>
+		</div>
+	</div>
+</div>

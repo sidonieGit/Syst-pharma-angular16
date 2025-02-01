@@ -1,0 +1,39 @@
+/* Premier Menu (fixé en haut) */
+.cc-navbar {
+  z-index: 50; /* Pour être au-dessus des autres éléments */
+  /* position reste fixe apres 10px vers le haut*/
+}
+
+/* Deuxième Menu (en dessous du premier) */
+.second-menu {
+  margin-top: 0px; /* Ajuste pour ne pas chevaucher le premier menu */
+}
+
+/* Toggler Button Ajusté */
+.navbar-toggler {
+  z-index: 1060;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .second-menu {
+    margin-top: 200px; /* Espace supplémentaire pour mobile */
+  }
+
+  .navbar-collapse {
+    background: #064685; /* Ajoute un fond au menu déroulant */
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  .navbar-nav {
+    text-align: center;
+    gap: 3px;
+  }
+}
+
+@media (min-width: 769px) {
+  .second-menu {
+    margin-top: 100px; /* Ajustement pour les écrans moyens */
+  }
+}

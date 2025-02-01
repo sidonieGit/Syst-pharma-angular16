@@ -1,0 +1,45 @@
+[
+  {
+    "id": 1,
+    "name": "Paracétamol 500mg",
+    "description": "Le paracétamol est utilisé pour soulager la douleur légère à modérée.",
+    "price": 150,
+    "image": "img/dafalgan1000mg.webp"
+  },
+	{
+    "id": 2,
+    "name": "Paracétamol",
+    "description": "Analgésique efficace contre la douleur",
+    "price": 500,
+    "image": "img/doliprane500mg.webp" 
+  },
+  {
+    "id": 3,
+    "name": "Ibuprofène",
+    "description": "Antalgique et anti-inflammatoire",
+    "price": 700,
+    "image": "img/paracetamol.webp"
+  },
+  {
+    "id": 4,
+    "name": "Vitamine C",
+    "description": "Supplément pour renforcer le système immunitaire",
+    "price": 300,
+   "image": "img/paracetamolVitC.webp"  
+  },
+  {
+    "id": 5,
+    "name": "Ibuprofène 200mg",
+    "description": "L'ibuprofène est utilisé pour soulager la douleur et réduire la fièvre.",
+    "price": 250,
+    "image": "img/para90mlSirop.webp"
+  },
+  {
+    "id": 6,
+    "name": "Amoxicilline 500mg",
+    "description": "L'amoxicilline est un antibiotique utilisé pour traiter les infections bactériennes.",
+    "price": 500,
+    "image": "img/paracetamolVitC.webp"
+
+  } 
+]

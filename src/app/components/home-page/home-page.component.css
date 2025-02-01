@@ -1,0 +1,10 @@
+.home-page-left {
+  background-image: url("/assets/img/banner-bg.jpg");
+  background-size: cover; /* Pour couvrir toute la zone */
+  background-position: center; /* Pour centrer l'image */
+  height: 50vh; /* Ajustez la hauteur selon vos besoins */
+}
+.button-call a {
+  text-decoration: none;
+  color: var(--color-black) !important;
+}

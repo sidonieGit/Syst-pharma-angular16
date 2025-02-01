@@ -1,0 +1,23 @@
+<div class="container mt-5">
+	<div *ngIf="product; else notFound">
+		<div class="row">
+			<div class="col-md-6">
+				<img [src]="product.image" class="img-fluid rounded shadow-lg" alt="{{ product.name }}">
+			</div>
+			<div class="col-md-6">
+				<h2>{{ product.name }}</h2>
+				<p>{{ product.description }}</p>
+				<h4 class="text-primary">{{ product.price }} €</h4>
+				<p><strong>Disponible à : </strong>{{ pharmacy?.name }}</p>
+				<p><strong>Adresse : </strong>{{ pharmacy?.address }}</p>
+
+				<button class="btn btn-success mt-3" (click)="addToCart()">
+					<i class="fas fa-shopping-cart"></i> Ajouter au panier
+				</button>
+			</div>
+		</div>
+	</div>
+	<ng-template #notFound>
+		<p class="text-danger">Produit non trouvé !</p>
+	</ng-template>
+</div>

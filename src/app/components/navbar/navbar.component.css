@@ -1,0 +1,146 @@
+.typing-effect::placeholder {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #666;
+  animation: typing 3s steps(30) infinite,
+    blink 0.5s step-end infinite alternate;
+  width: fit-content;
+}
+
+.search-wrapper {
+  width: 100%;
+  padding: 0 15px;
+}
+
+.search-container {
+  width: 100%;
+  max-width: 800px; /* Limite de largeur pour le contenu */
+
+  /* Petit écran (mobile) */
+  @media (max-width: 576px) {
+    width: calc(100% - 20px); /* Laisse un peu d'espace pour le bouton */
+  }
+
+  /* Écran moyen (tablette) */
+  @media (min-width: 577px) and (max-width: 991px) {
+    width: 400px;
+  }
+
+  /* Grand écran */
+  @media (min-width: 992px) {
+    width: 600px;
+  }
+}
+
+.form-control {
+  width: 100%;
+}
+
+/* Style pour les boutons */
+.btn-outline-light {
+  white-space: nowrap;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+/* Navbar Global */
+.cc-navbar {
+  padding: 10px 0;
+}
+
+/* Barre de recherche */
+.search-bar {
+  max-width: 600px;
+}
+
+.search-bar input {
+  flex: 1;
+}
+
+.search-bar button {
+  white-space: nowrap;
+}
+
+/* Alignement des icônes */
+.navbar-nav .btn {
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.navbar-nav .btn i {
+  font-size: 1.2rem;
+}
+
+.navbar-nav .small {
+  font-size: 0.8rem;
+}
+
+/* Modale inscription/connexion */
+
+.modal-body {
+  display: flex;
+  gap: 20px;
+}
+
+.col-md-6 {
+  flex: 1;
+}
+
+form .form-control {
+  margin-bottom: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container-fluid {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .search-bar {
+    width: 100%;
+  }
+
+  .navbar-nav {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .navbar-nav .btn {
+    font-size: 0.8rem;
+  }
+
+  .navbar-nav .btn i {
+    font-size: 1rem;
+  }
+
+  .navbar-nav .small {
+    font-size: 0.7rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .container-fluid {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

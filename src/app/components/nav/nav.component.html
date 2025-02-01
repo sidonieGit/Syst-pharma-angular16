@@ -1,0 +1,40 @@
+<!-- Deuxième Menu -->
+<div class="cc-navbar navbar navbar-expand-lg w-100 navbar-dark bg-secondary shadow-lg second-menu">
+	<div class="container-fluid">
+		<!-- Toggler button (mobile view) -->
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent2"
+			aria-controls="navbarContent2" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<!-- Navbar content -->
+		<div class="collapse navbar-collapse justify-content-center" id="navbarContent2">
+			<ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-5">
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" routerLink="/">Accueil</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLink="/products">Produits</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLink="/Assurances">Assurances</a>
+				</li>
+				<!-- Aide Dropdown avec ngbDropdown -->
+				<li class="nav-item dropdown" ngbDropdown>
+					<a class="nav-link dropdown-toggle" id="aideDropdown" role="button" ngbDropdownToggle>
+						<i class="bi bi-question-circle"></i> Aide
+					</a>
+					<div class="dropdown-menu" aria-labelledby="aideDropdown" ngbDropdownMenu>
+						<a class="dropdown-item" routerLink="/Questions">
+							<i class="bi bi-info-circle"></i> Questions fréquentes
+						</a>
+						<a class="dropdown-item" routerLink="/Contact">
+							<i class="bi bi-envelope"></i> Nous contacter
+						</a>
+					</div>
+				</li>
+
+			</ul>
+		</div>
+	</div>
+</div>
