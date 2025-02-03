@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import * as bootstrap from 'bootstrap';
 import { AuthService } from '../../services/auth.service';
 import { CartItem, CartService } from '../../services/cart.service';
+import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,6 +14,7 @@ export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;
   userName: string = '';
   UserFirstName: string = 'Utilisateur';
+  searchTerm: string = '';
 
   cartItems: CartItem[] = [];
   cartTotalQuantity: number = 0;
@@ -24,7 +26,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    private productsService: ProductsService
   ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -56,6 +59,10 @@ export class NavbarComponent implements OnInit {
     });
 
     this.loadCart();
+  }
+
+  updateFilteredProducts() {
+    this.productsService.setSearchTerm(this.searchTerm);
   }
 
   /**

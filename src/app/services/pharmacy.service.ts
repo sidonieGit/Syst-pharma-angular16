@@ -28,6 +28,8 @@ export class PharmacyService {
   // getPharmacyById(id: number): Pharmacy | undefined {
   //   return this.pharmacies.find((pharmacy) => pharmacy.id === id);
   // }
+
+  //permet de récupérer un pharmacie par son id
   getPharmacyById(id: number): Observable<Pharmacy | undefined> {
     const pharmacy = this.pharmacies.find((pharmacy) => pharmacy.id === id);
     return of(pharmacy);

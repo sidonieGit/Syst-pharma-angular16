@@ -3,4 +3,6 @@ export interface Pharmacy {
   name: string;
   address: string;
   phone: string;
+  openHour?: string;
+  closeHour?: string;
 }

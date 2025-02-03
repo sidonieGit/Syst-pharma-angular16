@@ -1,40 +1,64 @@
 <main id="main">
-
 	<!-- ======= Breadcrumbs ======= -->
 	<section class="breadcrumbs">
 		<div class="container">
-
 			<div class="d-flex justify-content-between align-items-center">
 				<h2>Produits</h2>
+				<!-- <div class="d-flex justify-content-between align-items-center"> -->
+				<!-- 🔎 Barre de recherche -->
+				<!-- <input type="search" placeholder="Rechercher un produit..." [(ngModel)]="filtername"
+						(ngModelChange)="updateFilteredProducts()" />
+				</div> -->
 				<ol>
 					<li>Accueil</li>
 					<li><a routerLink="products">Produits</a></li>
 				</ol>
 			</div>
-
 		</div>
-	</section><!-- End Breadcrumbs -->
-
+	</section>
+	<!-- End Breadcrumbs -->
 
 	<!-- ======= Section Produits ======= -->
 	<div class="container">
 		<div class="row">
-			<!-- Colonne Catégories -->
+			<!-- ✅ Colonne des filtres -->
 			<aside class="col-md-3 mb-4">
-				<div class="categories p-3 shadow-sm rounded">
-					<h4 class="mb-3">Catégories</h4>
+				<div class="p-3 shadow-sm rounded">
+					<h4 class="mb-3">Filtres</h4>
+
+
+					<!-- 🔹 Filtre par catégorie -->
+					<h5 class="mt-3">Catégories</h5>
 					<ul class="list-group">
-						<li class="list-group-item" *ngFor="let category of categories">
-							<a href="#" class="text-decoration-none">{{ category }}</a>
+						<li class="list-group-item" (click)="selectCategory(null)"
+							[ngClass]="{ 'active': selectedCategory === null }">
+							Toutes les catégories
+						</li>
+						<li class="list-group-item" *ngFor="let category of categories" (click)="selectCategory(category.id)"
+							[ngClass]="{ 'active': selectedCategory === category.id }">
+							{{ category.name }}
+						</li>
+					</ul>
+
+					<!-- 🔹 Filtre par pharmacie -->
+					<h5 class="mt-3">Pharmacies</h5>
+					<ul class="list-group">
+						<li class="list-group-item" (click)="selectPharmacy(null)"
+							[ngClass]="{ 'active': selectedPharmacy === null }">
+							Toutes les pharmacies
+						</li>
+						<li class="list-group-item" *ngFor="let pharmacyId of pharmacies" (click)="selectPharmacy(pharmacyId)"
+							[ngClass]="{ 'active': selectedPharmacy === pharmacyId }">
+							Pharmacie {{ pharmacyId }}
 						</li>
 					</ul>
 				</div>
 			</aside>
 
-			<!-- Section Produits -->
+			<!-- ✅ Section Produits -->
 			<div class="col-md-9">
 				<div class="row">
-					<div class="col-md-4 mb-4" *ngFor="let product of products">
+					<div class="col-md-4 mb-4" *ngFor="let product of filteredProducts">
 						<div class="product-card card shadow-sm">
 							<div class="product-image">
 								<img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}">
@@ -46,27 +70,24 @@
 									<span class="fw-bold">{{ product.price }} €</span>
 									<div class="call-to-action">
 										<button class="btn btn-sm btn-primary me-2" (click)="addToCart(product)">
-											<i class="fas fa-shopping-cart"></i> Ajouter au Panier
+											<i class="fas fa-shopping-cart"></i> Ajouter
 										</button>
 										<a [routerLink]="['/detail', product.id]" class="btn btn-sm btn-secondary">
 											<i class="fas fa-info-circle"></i> Détails
 										</a>
 									</div>
 								</div>
+								<small class="text-muted">Disponible en Pharmacie {{ product.pharmacyId }}</small>
 							</div>
 						</div>
 					</div>
+
+					<!-- 🚨 Alerte si aucun produit ne correspond au filtre -->
+					<div class="col-12 text-center" *ngIf="filteredProducts.length === 0">
+						<p class="alert alert-warning">Aucun produit trouvé.</p>
+					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
-
-
-
-	<!-- ======= Fin Section Produits ======= -->
-
-
-
-
-</main><!-- End #main -->
+</main>

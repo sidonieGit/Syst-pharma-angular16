@@ -1,6 +1,6 @@
 <!-- Livraison gratuite -->
 <div class="text-dark text-center py-2">
-	<span>Livraison gratuite pour toute commande supérieure à 50€</span>
+	<span>Reduction de 20% pour toute commande supérieure à 50€</span>
 </div>
 
 <!-- Navbar -->
@@ -13,14 +13,15 @@
 				<span class="d-md-none">SystPharma</span>
 			</a>
 
-			<!-- Barre de recherche -->
+			<!-- Barre de recherche dans la navbar -->
 			<div class="mx-auto d-flex align-items-center">
-				<input type="text" class="form-control typing-effect" id="search" placeholder="Rechercher un médicament..."
-					aria-label="Search" />
+				<input type="text" class="form-control typing-effect" id="search" [(ngModel)]="searchTerm"
+					(ngModelChange)="updateFilteredProducts()" placeholder="Rechercher un médicament..." aria-label="Search" />
 				<button class="btn btn-outline-light ms-2" type="button">
 					<i class="fas fa-search"></i>
 				</button>
 			</div>
+
 
 			<!-- Section droite -->
 			<ul class="navbar-nav d-flex align-items-center">
