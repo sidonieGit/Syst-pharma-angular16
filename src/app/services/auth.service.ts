@@ -2,6 +2,12 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Client } from '../model/client';
 
+export enum UserRole {
+  Admin = 'Admin',
+  Agent = 'Agent',
+  Client = 'Client',
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -66,12 +72,26 @@ export class AuthService {
     this.isLoggedInSubject.next(false);
   }
 
-  getUserName(): string {
+  getUserFullName(): string {
     return this.currentUser
       ? `${this.currentUser.firstName} ${this.currentUser.lastName}`
       : 'Guest';
   }
+
+  getUserName(): string {
+    return this.currentUser ? this.currentUser.email : 'Guest';
+  }
   getUserFirstName(): string {
     return this.currentUser ? this.currentUser.firstName : 'Guest';
   }
+  getUserRole(): UserRole | null {
+    return this.currentUser ? (this.currentUser.role as UserRole) : null;
+  }
+
+  getCurrentUser(): Client | null {
+    return this.currentUser;
+  }
+  // getUserRole(): UserRole | null {
+  //   return this.currentUser ? this.currentUser.role : null;
+  // }
 }

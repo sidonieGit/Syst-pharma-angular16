@@ -21,7 +21,7 @@ export class PharmacyService {
     },
   ];
 
-  getAllPharmacies(): Pharmacy[] {
+  getPharmacies(): Pharmacy[] {
     return this.pharmacies;
   }
 
@@ -33,5 +33,12 @@ export class PharmacyService {
   getPharmacyById(id: number): Observable<Pharmacy | undefined> {
     const pharmacy = this.pharmacies.find((pharmacy) => pharmacy.id === id);
     return of(pharmacy);
+  }
+  addPharmacy(pharmacy: Pharmacy) {
+    this.pharmacies.push(pharmacy);
+  }
+
+  deletePharmacy(id: number) {
+    this.pharmacies = this.pharmacies.filter((p) => p.id !== id);
   }
 }

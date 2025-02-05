@@ -7,6 +7,14 @@ import { ProductsComponent } from './components/products/products.component';
 import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
+  // {
+  //   path: '',
+  //   component: DashboardComponent,
+  //   canActivate: [authGuard],
+  // }, // Protégé par le guard
+  // { path: 'checkout', component: CheckoutComponent, canActivate: [authGuard] },
+  // { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
+  // { path: 'orders', component: OrdersComponent, canActivate: [authGuard] },
   {
     path: '',
     component: HomePageComponent,

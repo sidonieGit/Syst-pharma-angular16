@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { CATEGORIES } from 'src/app/model/mock-categories';
-import { PRODUCTS } from 'src/app/model/mock-products';
-import { Product } from 'src/app/model/product';
+import { CATEGORIES } from '../../model/mock-categories';
+import { PRODUCTS } from '../../model/mock-products';
+import { Product } from '../../model/product';
 import { AuthService } from '../../services/auth.service';
 import { CartService } from '../../services/cart.service';
 import { ProductsService } from '../../services/products.service';
