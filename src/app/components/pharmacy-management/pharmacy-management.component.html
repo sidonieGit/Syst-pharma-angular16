@@ -1,1 +1,90 @@
-<p>pharmacy-management works!</p>
+<div class="dashboard-container">
+	<nav class="tabs">
+		<button (click)="setActiveTab('medicaments')" [class.active]="activeTab === 'medicaments'" class="tab-button">
+			Gestion des Médicaments
+		</button>
+		<button (click)="setActiveTab('orders')" [class.active]="activeTab === 'orders'" class="tab-button">
+			Commandes des Clients
+		</button>
+	</nav>
+
+	<!-- Medicament Management Tab -->
+	<div *ngIf="activeTab === 'medicaments'" class="medicament-management">
+		<h2>Gestion des Médicaments</h2>
+		<input type="search" placeholder="Rechercher un médicament..." [(ngModel)]="filtername"
+			(ngModelChange)="updateFilteredProducts()" class="form-control" />
+		<button (click)="openAddMedicamentModal()" class="btn-primary">Ajouter un Médicament</button>
+
+		<div *ngFor="let product of filteredProducts" class="product-card">
+			<div>
+				<h3>{{ product.name }}</h3>
+				<p>{{ product.description }}</p>
+				<p>{{ product.price }} €</p>
+			</div>
+			<div>
+				<button (click)="editProduct(product)" class="btn-edit">Modifier</button>
+				<button (click)="deleteProduct(product.id)" class="btn-delete">Supprimer</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Orders Management Tab -->
+	<div *ngIf="activeTab === 'orders'" class="order-management">
+		<h2>Commandes des Clients</h2>
+		<div *ngFor="let order of orders" class="order-card">
+			<div>
+				<h3>Commande #{{ order.id }}</h3>
+				<p>Status: {{ order.status }}</p>
+			</div>
+			<div>
+				<button (click)="confirmPayment(order.id)" class="btn-confirm">Confirmer Paiement</button>
+				<button (click)="confirmDelivery(order.id)" class="btn-confirm">Confirmer Livraison</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Overlay -->
+	<div class="modal-overlay" [ngClass]="{'visible': showAddModal}" (click)="closeAddMedicamentModal()"></div>
+
+	<!-- Modal Ajout -->
+	<div class="modal" [ngClass]="{'visible': showAddModal}">
+		<div class="modal-content">
+			<h3>{{ editMode ? 'Modifier' : 'Ajouter' }} un Médicament</h3>
+			<div class="form-group">
+				<label for="name">Nom du médicament</label>
+				<input id="name" [(ngModel)]="newProduct.name" placeholder="Nom du médicament" class="form-control" />
+			</div>
+			<div class="form-group">
+				<label for="description">Description</label>
+				<input id="description" [(ngModel)]="newProduct.description" placeholder="Description" class="form-control" />
+			</div>
+			<div class="form-group">
+				<label for="price">Prix</label>
+				<input id="price" [(ngModel)]="newProduct.price" type="number" placeholder="Prix" class="form-control" />
+			</div>
+			<div class="form-group">
+				<label for="image">URL de l'image</label>
+				<input id="image" [(ngModel)]="newProduct.image" placeholder="URL de l'image" class="form-control" />
+			</div>
+			<div class="form-group">
+				<label for="categoryId">ID de la catégorie</label>
+				<input id="categoryId" [(ngModel)]="newProduct.categoryId" type="number" placeholder="ID de la catégorie"
+					class="form-control" />
+			</div>
+			<div class="form-group">
+				<label for="pharmacyId">ID de la pharmacie</label>
+				<input id="pharmacyId" [(ngModel)]="newProduct.pharmacyId" type="number" placeholder="ID de la pharmacie"
+					class="form-control" />
+			</div>
+			<div class="form-group">
+				<label for="quantity">Quantité</label>
+				<input id="quantity" [(ngModel)]="newProduct.quantity" type="number" placeholder="Quantité"
+					class="form-control" />
+			</div>
+			<div class="form-actions">
+				<button (click)="saveProduct()" class="btn-primary">{{ editMode ? 'Mettre à jour' : 'Enregistrer' }}</button>
+				<button (click)="closeAddMedicamentModal()" class="btn-secondary">Annuler</button>
+			</div>
+		</div>
+	</div>
+</div>

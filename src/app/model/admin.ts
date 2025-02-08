@@ -1,5 +1,5 @@
-import { Utilisateur } from './utilisateur';
-export class Admin extends Utilisateur {
+import { User } from './user';
+export class Admin extends User {
   constructor(
     firstName: string,
     lastName: string,

@@ -1,6 +1,6 @@
-import { Utilisateur } from './utilisateur';
+import { User } from './user';
 
-export class Client extends Utilisateur {
+export class Client extends User {
   district: string;
   commandNumber: number = 0;
 

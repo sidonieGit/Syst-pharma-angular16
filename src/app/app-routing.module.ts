@@ -5,16 +5,30 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProductsComponent } from './components/products/products.component';
 import { RegisterComponent } from './components/register/register.component';
+import { PharmacyManagementComponent } from './components/pharmacy-management/pharmacy-management.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { authGuard } from './guards/auth.guard';
+import { UserRole } from './services/auth.service';
 
 const routes: Routes = [
   // {
   //   path: '',
-  //   component: DashboardComponent,
+  //   component: HomePageComponent,
   //   canActivate: [authGuard],
-  // }, // Protégé par le guard
-  // { path: 'checkout', component: CheckoutComponent, canActivate: [authGuard] },
-  // { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
-  // { path: 'orders', component: OrdersComponent, canActivate: [authGuard] },
+  //   data: { role: UserRole.Client },
+  // },
+  {
+    path: 'admin-dashboard',
+    component: AdminDashboardComponent,
+    canActivate: [authGuard],
+    data: { role: UserRole.Admin },
+  },
+  {
+    path: 'pharmacy-management',
+    component: PharmacyManagementComponent,
+    canActivate: [authGuard],
+    data: { role: UserRole.Agent },
+  },
   {
     path: '',
     component: HomePageComponent,
@@ -33,6 +47,8 @@ const routes: Routes = [
   },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomePageComponent },
+  { path: 'admin-dashboard', component: AdminDashboardComponent },
+  { path: 'pharmacy-management', component: PharmacyManagementComponent },
 ];
 
 @NgModule({

@@ -3,7 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import * as bootstrap from 'bootstrap';
 import { AuthService } from '../../services/auth.service';
 import { CartItem, CartService } from '../../services/cart.service';
-import { ProductsService } from '../../services/products.service';
+import { ProductsService } from '../../services/medicament.service';
 
 @Component({
   selector: 'app-navbar',

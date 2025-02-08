@@ -3,69 +3,77 @@
 		<h2>Register</h2>
 
 		<div class="input_box">
-			<input type="text" placeholder="First Name" formControlName="firstName" />
-			<div *ngIf="firstName?.invalid && (firstName?.touched || firstName?.dirty)">
+			<label for="firstName">First Name</label>
+			<input type="text" id="firstName" placeholder="First Name" formControlName="firstName" />
+			<div *ngIf="firstName?.invalid && (firstName?.touched || firstName?.dirty)" class="error-text">
 				<div *ngIf="firstName?.errors?.['required']">First Name is required</div>
 				<div *ngIf="firstName?.errors?.['pattern']">First Name must be alphabetic.</div>
 			</div>
 		</div>
 
 		<div class="input_box">
-			<input type="text" placeholder="Last Name" formControlName="lastName" />
-			<div *ngIf="lastName?.invalid && (lastName?.touched || lastName?.dirty)">
+			<label for="lastName">Last Name</label>
+			<input type="text" id="lastName" placeholder="Last Name" formControlName="lastName" />
+			<div *ngIf="lastName?.invalid && (lastName?.touched || lastName?.dirty)" class="error-text">
 				<div *ngIf="lastName?.errors?.['required']">Last Name is required</div>
 				<div *ngIf="lastName?.errors?.['pattern']">Last Name must be alphabetic.</div>
 			</div>
 		</div>
 
 		<div class="input_box">
-			<input type="email" placeholder="Email" formControlName="email" />
-			<div *ngIf="email?.invalid && (email?.touched || email?.dirty)">
+			<label for="email">Email</label>
+			<input type="email" id="email" placeholder="Email" formControlName="email" />
+			<div *ngIf="email?.invalid && (email?.touched || email?.dirty)" class="error-text">
 				<div *ngIf="email?.errors?.['required']">Email is required</div>
 				<div *ngIf="email?.errors?.['email']">Email is invalid</div>
 			</div>
 		</div>
 
 		<div class="input_box">
-			<input type="text" placeholder="Phone" formControlName="phone" />
-			<div *ngIf="phone?.invalid && (phone?.touched || phone?.dirty)">
+			<label for="phone">Phone</label>
+			<input type="text" id="phone" placeholder="Phone" formControlName="phone" />
+			<div *ngIf="phone?.invalid && (phone?.touched || phone?.dirty)" class="error-text">
 				<div *ngIf="phone?.errors?.['required']">Phone is required</div>
 				<div *ngIf="phone?.errors?.['minlength']">Phone number must be at least 10 characters long.</div>
 			</div>
 		</div>
 
 		<div class="input_box">
-			<input type="text" placeholder="District" formControlName="district" />
-			<div *ngIf="district?.invalid && (district?.touched || district?.dirty)">
+			<label for="district">District</label>
+			<input type="text" id="district" placeholder="District" formControlName="district" />
+			<div *ngIf="district?.invalid && (district?.touched || district?.dirty)" class="error-text">
 				<div *ngIf="district?.errors?.['required']">District is required</div>
 				<div *ngIf="district?.errors?.['minlength']">District must be at least 3 characters long.</div>
 			</div>
 		</div>
 
 		<div class="input_box">
-			<input type="password" placeholder="Password" formControlName="password" />
-			<div *ngIf="password?.invalid && (password?.touched || password?.dirty)">
+			<label for="password">Password</label>
+			<input type="password" id="password" placeholder="Password" formControlName="password" />
+			<div *ngIf="password?.invalid && (password?.touched || password?.dirty)" class="error-text">
 				<div *ngIf="password?.errors?.['required']">Password is required</div>
 				<div *ngIf="password?.errors?.['minlength']">Password must be at least 6 characters long.</div>
 			</div>
 		</div>
 
 		<div class="input_box">
-			<input type="password" placeholder="Confirm Password" formControlName="confirmPassword" />
-			<div *ngIf="confirmPassword?.invalid && (confirmPassword?.touched || confirmPassword?.dirty)">
+			<label for="confirmPassword">Confirm Password</label>
+			<input type="password" id="confirmPassword" placeholder="Confirm Password" formControlName="confirmPassword" />
+			<div *ngIf="confirmPassword?.invalid && (confirmPassword?.touched || confirmPassword?.dirty)" class="error-text">
 				<div *ngIf="confirmPassword?.errors?.['required']">Confirm Password is required</div>
 				<div *ngIf="confirmPassword?.errors?.['minlength']">Confirm Password must be at least 6 characters long.</div>
 			</div>
-			<div *ngIf="registerForm.errors?.['mismatch'] && (confirmPassword?.touched || confirmPassword?.dirty)">
+			<div *ngIf="registerForm.errors?.['mismatch'] && (confirmPassword?.touched || confirmPassword?.dirty)"
+				class="error-text">
 				Passwords do not match.
 			</div>
-			<small *ngIf="registerForm.errors?.['passwordMismatch'] && confirmPassword?.valid && password?.valid"> Passwords
-				should match.</small>
+			<small *ngIf="registerForm.errors?.['passwordMismatch'] && confirmPassword?.valid && password?.valid"
+				class="error-text"> Passwords should match.</small>
 		</div>
 
-		<button type="submit" [disabled]="registerForm.invalid">Register</button>
+		<button type="submit" [disabled]="registerForm.invalid" class="btn-success">Register</button>
 
-		<div class="login_signup">
+		<div class="register_login">
 			Already have an account?
 			<a routerLink="/login">Login</a>
 		</div>

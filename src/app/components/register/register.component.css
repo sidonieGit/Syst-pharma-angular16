@@ -1,5 +1,4 @@
 /* Container principal du register */
-
 .register-container {
   max-width: 400px;
   margin: 50px auto;
@@ -19,6 +18,12 @@
   margin-bottom: 15px;
 }
 
+.input_box label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
 .input_box input {
   width: 100%;
   padding: 10px;
@@ -26,7 +31,7 @@
   border-radius: 4px;
 }
 
-.input_box small {
+.input_box .error-text {
   color: red;
   font-size: 12px;
 }
@@ -54,6 +59,11 @@ button {
 .register_login {
   text-align: center;
   margin-top: 15px;
+}
+
+.register_login a {
+  text-decoration: none;
+  color: #007bff;
 }
 
 .register_login a {
