@@ -1,10 +1,11 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { CATEGORIES } from 'src/app/model/mock-categories';
-import { PRODUCTS } from 'src/app/model/mock-products';
-import { Product } from 'src/app/model/product';
+import { CATEGORIES } from '../../model/mock-categories';
+import { Product } from '../../model/product';
+import { Pharmacy } from '../../model/pharmacy';
 import { AuthService } from '../../services/auth.service';
 import { CartService } from '../../services/cart.service';
-import { ProductsService } from '../../services/products.service';
+import { ProductsService } from '../../services/medicament.service';
+import { PharmacyService } from '../../services/pharmacy.service';
 
 @Component({
   selector: 'app-products',
@@ -12,12 +13,12 @@ import { ProductsService } from '../../services/products.service';
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
-  products: Product[] = PRODUCTS;
+  products: Product[] = [];
   filtername: string = '';
   filteredProducts: Product[] = [];
   cartItemCount: number = 0;
   categories = CATEGORIES;
-  pharmacies: number[] = [];
+  pharmacies: Pharmacy[] = [];
   selectedCategory: number | null = null;
   selectedPharmacy: number | null = null;
   isVisible: boolean = false;
@@ -25,19 +26,21 @@ export class ProductsComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private cartService: CartService,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private pharmacyService: PharmacyService
   ) {}
 
   ngOnInit(): void {
+    this.productsService.loadProducts();
+    this.products = this.productsService.getProducts();
+    this.filteredProducts = this.products;
+
     this.cartService.cartTotalQuantity$.subscribe(
       (count) => (this.cartItemCount = count)
     );
 
-    this.pharmacies = [...new Set(PRODUCTS.map((p) => p.pharmacyId))];
+    this.pharmacies = this.pharmacyService.getPharmacies();
 
-    // Initialisation des produits filtrés
-    // this.updateFilteredProducts();
-    // Écouter la recherche depuis le service
     this.productsService.searchTerm$.subscribe((term) => {
       this.filtername = term;
       this.updateFilteredProducts();
@@ -59,9 +62,6 @@ export class ProductsComponent implements OnInit {
     );
   }
 
-  /**
-   * Filtre les produits en fonction de la recherche, de la catégorie et de la pharmacie sélectionnées
-   */
   updateFilteredProducts() {
     this.filteredProducts = this.products.filter((product) => {
       const nameMatch = product.name

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService, UserRole } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -40,6 +40,7 @@ export class LoginComponent {
       //sinon on affiche un message d'erreur
     }
   }
+
   onLoginSubmit(): void {
     if (this.loginForm.valid) {
       // Utilisation de l'opérateur de coalescence nulle pour garantir que la valeur soit une chaîne
@@ -47,8 +48,25 @@ export class LoginComponent {
       const password = this.loginForm.get('password')?.value ?? '';
 
       if (this.authService.login(email, password)) {
+        const currentUser = this.authService.getCurrentUser();
         alert('Login successful!');
-        this.router.navigate(['/home']); // Redirige vers la page d'accueil ou celle de votre choix
+
+        // Vérification du rôle de l'utilisateur pour la redirection
+        if (currentUser) {
+          switch (currentUser.role) {
+            case UserRole.Admin:
+              this.router.navigate(['/admin-dashboard']);
+              break;
+            case UserRole.Agent:
+              this.router.navigate(['/pharmacy-management']);
+              break;
+            case UserRole.Client:
+              this.router.navigate(['/home']);
+              break;
+            default:
+              this.router.navigate(['/home']);
+          }
+        }
       } else {
         alert('Invalid email or password!');
       }

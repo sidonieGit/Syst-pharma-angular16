@@ -14,6 +14,8 @@ import { ProductsComponent } from './components/products/products.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { PharmacyManagementComponent } from './components/pharmacy-management/pharmacy-management.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DetailsComponent,
     LoginComponent,
     RegisterComponent,
+    AdminDashboardComponent,
+    PharmacyManagementComponent,
   ],
   imports: [
     BrowserModule,

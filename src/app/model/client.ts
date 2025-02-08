@@ -1,10 +1,18 @@
-export class Client {
-  id?: number; // Identifiant unique du client
-  firstName: string = '';
-  lastName: string = '';
-  email: string = '';
-  phone: string = '';
-  district: string = '';
-  password: string = '';
-  dateDAjout?: Date; // Date d'inscription du client
+import { User } from './user';
+
+export class Client extends User {
+  district: string;
+  commandNumber: number = 0;
+
+  constructor(
+    firstName: string,
+    lastName: string,
+    email: string,
+    phone: string,
+    password: string,
+    district: string
+  ) {
+    super(firstName, lastName, email, phone, password, 'Client');
+    this.district = district;
+  }
 }

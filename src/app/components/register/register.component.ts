@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Client } from 'src/app/model/client'; // Assurez-vous que cette interface est définie
-import { AuthService } from 'src/app/services/auth.service';
+import { Client } from 'src/app/model/client';
+import { AuthService, UserRole } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -10,6 +10,8 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
+  UserRole = UserRole; // Pour utiliser l'enum UserRole dans le template
+
   registerForm = this.fb.group(
     {
       firstName: [
@@ -25,6 +27,7 @@ export class RegisterComponent {
       district: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+      role: [UserRole.Client], // Rôle par défaut pour le client
     },
     { validators: this.passwordMatchValidator }
   );
@@ -61,14 +64,14 @@ export class RegisterComponent {
   passwordMatchValidator(form: any) {
     return form.get('password').value === form.get('confirmPassword').value
       ? null
-      : { mismatch: true }; // Renvoie un objet avec une propriété mismatch si les mots de passe ne correspondent pas
+      : { mismatch: true };
   }
 
   onRegisterSubmit(): void {
     if (this.registerForm.valid) {
-      const { confirmPassword, ...clientData } = this.registerForm.value; // Extrait les propriétés de clientData qui ne sont pas confirmPassword
+      const { confirmPassword, ...userData } = this.registerForm.value; // Extrait les propriétés de userData qui ne sont pas confirmPassword
 
-      if (this.authService.register(clientData as Client)) {
+      if (this.authService.register(userData as Client)) {
         alert('Registration successful!');
         this.router.navigate(['/login']);
       } else {

@@ -1,0 +1,161 @@
+<div class="dashboard-container">
+	<nav class="tabs">
+		<button (click)="setActiveTab('dashboard')" [class.active]="activeTab === 'dashboard'" class="tab-button">
+			Tableau de Bord
+		</button>
+		<button (click)="setActiveTab('pharmacies')" [class.active]="activeTab === 'pharmacies'" class="tab-button">
+			Gestion des Pharmacies
+		</button>
+	</nav>
+
+	<!-- Dashboard Tab -->
+	<div *ngIf="activeTab === 'dashboard'" class="dashboard-content">
+		<h1>Tableau de Bord</h1>
+
+		<div class="dashboard-stats">
+			<div class="stat-card">
+				<h2>Utilisateurs</h2>
+				<p>{{ totalUsers }}</p>
+			</div>
+			<div class="stat-card">
+				<h2>Pharmacies</h2>
+				<p>{{ totalPharmacies }}</p>
+			</div>
+			<div class="stat-card">
+				<h2>Commandes en attente</h2>
+				<p>{{ pendingOrders }}</p>
+			</div>
+		</div>
+
+		<div class="chart-wrapper">
+			<canvas #dashboardChart></canvas>
+		</div>
+	</div>
+
+	<!-- Pharmacy Management Tab -->
+	<div *ngIf="activeTab === 'pharmacies'" class="pharmacy-management">
+		<h2>Gestion des Pharmacies</h2>
+
+		<!-- Error Message Display -->
+		<div *ngIf="errorMessage" class="error-message" role="alert">
+			{{ errorMessage }}
+		</div>
+
+		<!-- Pharmacy Form -->
+		<form (ngSubmit)="editMode ? updatePharmacy() : addPharmacy()" #pharmacyForm="ngForm" class="pharmacy-form">
+			<div class="form-group">
+				<label for="name">Nom de la pharmacie</label>
+				<input type="text" id="name" [(ngModel)]="newPharmacy.name" name="name" #name="ngModel" required
+					placeholder="Nom de la pharmacie" class="form-control" />
+				<div *ngIf="name.invalid && (name.dirty || name.touched)" class="error-text">
+					Le nom est requis
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="address">Adresse</label>
+				<input type="text" id="address" [(ngModel)]="newPharmacy.address" name="address" #address="ngModel" required
+					placeholder="Adresse" class="form-control" />
+				<div *ngIf="address.invalid && (address.dirty || address.touched)" class="error-text">
+					L'adresse est requise
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="phone">Téléphone</label>
+				<input type="tel" id="phone" [(ngModel)]="newPharmacy.phone" name="phone" #phone="ngModel" required
+					placeholder="Téléphone" class="form-control" />
+				<div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="error-text">
+					Le numéro de téléphone est requis
+				</div>
+			</div>
+
+			<!-- Agent Information -->
+			<div class="form-group">
+				<label for="agentFirstName">Prénom de l'agent</label>
+				<input type="text" id="agentFirstName" [(ngModel)]="newAgent.firstName" name="agentFirstName"
+					#agentFirstName="ngModel" required placeholder="Prénom de l'agent" class="form-control" />
+				<div *ngIf="agentFirstName.invalid && (agentFirstName.dirty || agentFirstName.touched)" class="error-text">
+					Le prénom de l'agent est requis
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="agentLastName">Nom de famille de l'agent</label>
+				<input type="text" id="agentLastName" [(ngModel)]="newAgent.lastName" name="agentLastName"
+					#agentLastName="ngModel" required placeholder="Nom de famille de l'agent" class="form-control" />
+				<div *ngIf="agentLastName.invalid && (agentLastName.dirty || agentLastName.touched)" class="error-text">
+					Le nom de famille de l'agent est requis
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="agentEmail">Email de l'agent</label>
+				<input type="email" id="agentEmail" [(ngModel)]="newAgent.email" name="agentEmail" #agentEmail="ngModel"
+					required placeholder="Email de l'agent" class="form-control" />
+				<div *ngIf="agentEmail.invalid && (agentEmail.dirty || agentEmail.touched)" class="error-text">
+					L'email de l'agent est requis
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="agentPhone">Téléphone de l'agent</label>
+				<input type="tel" id="agentPhone" [(ngModel)]="newAgent.phone" name="agentPhone" #agentPhone="ngModel" required
+					placeholder="Téléphone de l'agent" class="form-control" />
+				<div *ngIf="agentPhone.invalid && (agentPhone.dirty || agentPhone.touched)" class="error-text">
+					Le téléphone de l'agent est requis
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="agentPassword">Mot de passe de l'agent</label>
+				<input type="password" id="agentPassword" [(ngModel)]="newAgent.password" name="agentPassword"
+					#agentPassword="ngModel" required placeholder="Mot de passe de l'agent" class="form-control" />
+				<div *ngIf="agentPassword.invalid && (agentPassword.dirty || agentPassword.touched)" class="error-text">
+					Le mot de passe de l'agent est requis
+				</div>
+			</div>
+
+			<div class="form-actions">
+				<button type="submit" [disabled]="!pharmacyForm.form.valid" class="btn-primary">
+					{{ editMode ? 'Mettre à jour' : 'Ajouter' }}
+				</button>
+				<button type="button" (click)="resetForm()" class="btn-secondary">
+					Annuler
+				</button>
+			</div>
+		</form>
+
+		<!-- Pharmacies Table -->
+		<div class="table-responsive">
+			<table class="pharmacies-table">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Adresse</th>
+						<th>Téléphone</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let pharmacy of pharmacies">
+						<td>{{ pharmacy.name }}</td>
+						<td>{{ pharmacy.address }}</td>
+						<td>{{ pharmacy.phone }}</td>
+						<td class="actions">
+							<button (click)="editPharmacy(pharmacy)" class="btn-edit" title="Modifier">
+								Modifier
+							</button>
+							<button (click)="deletePharmacy(pharmacy.id)" class="btn-delete" title="Supprimer">
+								Supprimer
+							</button>
+						</td>
+					</tr>
+					<tr *ngIf="pharmacies.length === 0">
+						<td colspan="4" class="no-data">Aucune pharmacie enregistrée</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
