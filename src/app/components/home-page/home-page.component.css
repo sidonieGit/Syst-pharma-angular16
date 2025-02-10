@@ -8,3 +8,6 @@
   text-decoration: none;
   color: var(--color-black) !important;
 }
+.button-call2:hover {
+  background-color: #3b82f6 !important;
+}

@@ -8,7 +8,6 @@
 		</button>
 	</nav>
 
-	<!-- Medicament Management Tab -->
 	<div *ngIf="activeTab === 'medicaments'" class="medicament-management">
 		<h2>Gestion des Médicaments</h2>
 		<input type="search" placeholder="Rechercher un médicament..." [(ngModel)]="filtername"
@@ -28,25 +27,8 @@
 		</div>
 	</div>
 
-	<!-- Orders Management Tab -->
-	<div *ngIf="activeTab === 'orders'" class="order-management">
-		<h2>Commandes des Clients</h2>
-		<div *ngFor="let order of orders" class="order-card">
-			<div>
-				<h3>Commande #{{ order.id }}</h3>
-				<p>Status: {{ order.status }}</p>
-			</div>
-			<div>
-				<button (click)="confirmPayment(order.id)" class="btn-confirm">Confirmer Paiement</button>
-				<button (click)="confirmDelivery(order.id)" class="btn-confirm">Confirmer Livraison</button>
-			</div>
-		</div>
-	</div>
-
-	<!-- Modal Overlay -->
 	<div class="modal-overlay" [ngClass]="{'visible': showAddModal}" (click)="closeAddMedicamentModal()"></div>
 
-	<!-- Modal Ajout -->
 	<div class="modal" [ngClass]="{'visible': showAddModal}">
 		<div class="modal-content">
 			<h3>{{ editMode ? 'Modifier' : 'Ajouter' }} un Médicament</h3>
@@ -67,14 +49,14 @@
 				<input id="image" [(ngModel)]="newProduct.image" placeholder="URL de l'image" class="form-control" />
 			</div>
 			<div class="form-group">
-				<label for="categoryId">ID de la catégorie</label>
-				<input id="categoryId" [(ngModel)]="newProduct.categoryId" type="number" placeholder="ID de la catégorie"
-					class="form-control" />
+				<label for="category">Catégorie</label>
+				<select id="category" [(ngModel)]="newProduct.categoryId" class="form-control">
+					<option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+				</select>
 			</div>
 			<div class="form-group">
-				<label for="pharmacyId">ID de la pharmacie</label>
-				<input id="pharmacyId" [(ngModel)]="newProduct.pharmacyId" type="number" placeholder="ID de la pharmacie"
-					class="form-control" />
+				<label for="nomPharmacy">Nom de la pharmacie</label>
+				<input id="nomPharmacy" [value]="pharmacyName$ | async" class="form-control" disabled />
 			</div>
 			<div class="form-group">
 				<label for="quantity">Quantité</label>

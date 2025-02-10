@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Admin } from '../model/admin';
 import { AgentPharmacie } from '../model/agent-pharmacie';
 import { Client } from '../model/client';
@@ -111,6 +111,35 @@ export class AuthService {
 
     this.saveUserToLocalStorage(agent);
     return true;
+  }
+
+  updateAgent(updatedAgent: AgentPharmacie): void {
+    const users: User[] = JSON.parse(localStorage.getItem('users') || '[]');
+    const index = users.findIndex((u) => u.email === updatedAgent.email);
+
+    if (index !== -1) {
+      users[index] = updatedAgent;
+      localStorage.setItem('users', JSON.stringify(users));
+    }
+  }
+
+  getAgentByPharmacyId(
+    idPharmacy: number
+  ): Observable<AgentPharmacie | undefined> {
+    const users: User[] = JSON.parse(localStorage.getItem('users') || '[]');
+    const agent = users.find(
+      (u) =>
+        u.role === UserRole.Agent &&
+        (u as AgentPharmacie).idPharmacy === idPharmacy
+    ) as AgentPharmacie;
+    return of(agent);
+  }
+  // Retourne l'ID de la pharmacie de l'agent actuellement connecté
+  getCurrentPharmacyId(): number | null {
+    if (this.currentUser && this.isAgentPharmacie(this.currentUser)) {
+      return (this.currentUser as AgentPharmacie).idPharmacy;
+    }
+    return null;
   }
 
   isLoggedIn(): boolean {

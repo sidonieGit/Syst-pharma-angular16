@@ -16,6 +16,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { PharmacyManagementComponent } from './components/pharmacy-management/pharmacy-management.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { PharmacyManagementComponent } from './components/pharmacy-management/ph
     RegisterComponent,
     AdminDashboardComponent,
     PharmacyManagementComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

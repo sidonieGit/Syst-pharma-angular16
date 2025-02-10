@@ -101,18 +101,6 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
           },
         ],
       },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              stepSize: 1,
-            },
-          },
-        },
-      },
     };
 
     this.chart = new Chart(ctx, config);
@@ -163,6 +151,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
 
     try {
       this.pharmacyService.updatePharmacy(this.newPharmacy);
+      this.authService.updateAgent(this.newAgent); // Mettre à jour l'agent associé
       this.loadPharmacies(); // Recharger la liste
       this.resetForm();
     } catch (error) {
@@ -185,6 +174,16 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
 
   editPharmacy(pharmacy: Pharmacy): void {
     this.newPharmacy = { ...pharmacy };
+    this.authService.getAgentByPharmacyId(pharmacy.id).subscribe({
+      next: (agent) => {
+        if (agent) {
+          this.newAgent = agent;
+        }
+      },
+      error: (err) => {
+        console.error("Erreur lors de la récupération de l'agent:", err);
+      },
+    });
     this.editMode = true;
     this.errorMessage = '';
   }

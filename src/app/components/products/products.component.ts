@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { CATEGORIES } from '../../model/mock-categories';
-import { Product } from '../../model/product';
 import { Pharmacy } from '../../model/pharmacy';
+import { Product } from '../../model/product';
 import { AuthService } from '../../services/auth.service';
 import { CartService } from '../../services/cart.service';
 import { ProductsService } from '../../services/medicament.service';
@@ -38,7 +38,7 @@ export class ProductsComponent implements OnInit {
     this.cartService.cartTotalQuantity$.subscribe(
       (count) => (this.cartItemCount = count)
     );
-
+    // Charger les pharmacies depuis le mock et le localStorage
     this.pharmacies = this.pharmacyService.getPharmacies();
 
     this.productsService.searchTerm$.subscribe((term) => {

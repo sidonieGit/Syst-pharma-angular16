@@ -9,6 +9,7 @@ import { PharmacyManagementComponent } from './components/pharmacy-management/ph
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { authGuard } from './guards/auth.guard';
 import { UserRole } from './services/auth.service';
+import { FooterComponent } from './components/footer/footer.component';
 
 const routes: Routes = [
   // {
@@ -49,6 +50,7 @@ const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: 'pharmacy-management', component: PharmacyManagementComponent },
+  { path: 'footer', component: FooterComponent },
 ];
 
 @NgModule({

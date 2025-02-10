@@ -23,12 +23,23 @@ export class ProductsService {
 
   loadProducts(): void {
     const storedProducts = localStorage.getItem(this.STORAGE_KEY);
-    if (storedProducts) {
-      this.products = [...PRODUCTS, ...JSON.parse(storedProducts)];
-    } else {
-      this.products = PRODUCTS;
-      this.saveProducts();
-    }
+    const parsedStoredProducts = storedProducts
+      ? JSON.parse(storedProducts)
+      : [];
+
+    // Ajout des produits du mock si leur ID n'existe pas dans les produits stockés
+    this.products = [...parsedStoredProducts];
+    PRODUCTS.forEach((mockProduct) => {
+      const exists = this.products.some(
+        (product) => product.id === mockProduct.id
+      );
+      if (!exists) {
+        this.products.push(mockProduct);
+      }
+    });
+
+    // Sauvegarder les produits combinés dans le localStorage
+    this.saveProducts();
   }
 
   getProducts(): Product[] {
