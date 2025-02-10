@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/model/product';
 import { Pharmacy } from 'src/app/model/pharmacy';
 import { CartService } from 'src/app/services/cart.service';
 import { PharmacyService } from 'src/app/services/pharmacy.service';
-import { PRODUCTS } from 'src/app/model/mock-products'; // Assurez-vous que le chemin est correct
+import { ProductsService } from 'src/app/services/products.service'; // Importer le service des produits
 
 @Component({
   selector: 'app-detail',
@@ -12,13 +12,15 @@ import { PRODUCTS } from 'src/app/model/mock-products'; // Assurez-vous que le c
   styleUrls: ['./detail.component.css'],
 })
 export class DetailsComponent implements OnInit {
-  product!: Product | undefined;
-  pharmacy!: Pharmacy | undefined;
+  product!: Product | undefined; //  Produit sélectionné
+  pharmacy!: Pharmacy | undefined; // Pharmacie sélectionnée
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router, // Ajouter Router pour la navigation
     private pharmacyService: PharmacyService,
-    private cartService: CartService
+    private cartService: CartService,
+    private productsService: ProductsService // Injection du service des produits
   ) {}
 
   ngOnInit(): void {
@@ -31,13 +33,16 @@ export class DetailsComponent implements OnInit {
   private loadProductDetails(): void {
     const productId = Number(this.route.snapshot.paramMap.get('id'));
     if (!isNaN(productId)) {
-      this.product = PRODUCTS.find((product) => product.id === productId);
+      // Chercher le produit dans tous les produits (localStorage et mock)
+      this.product = this.productsService
+        .getAllProducts()
+        .find((product) => product.id === productId);
 
       if (this.product && this.product.pharmacyId) {
         this.loadPharmacyDetails(this.product.pharmacyId);
       }
     } else {
-      console.error('ID du produit invalide'); //  permet
+      console.error('ID du produit invalide');
     }
   }
 
@@ -74,5 +79,12 @@ export class DetailsComponent implements OnInit {
     } else {
       console.warn('Aucun produit sélectionné pour l’ajout au panier');
     }
+  }
+
+  /**
+   * Retourne à la page des produits
+   */
+  goBack(): void {
+    this.router.navigate(['/products']);
   }
 }

@@ -1,0 +1,103 @@
+<footer class="bg-gray-900 text-gray-300">
+	<!-- Main Footer -->
+	<div class="max-w-7xl mx-auto px-4 py-8">
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+			<!-- À Propos -->
+			<div>
+				<h3 class="text-white text-lg font-semibold mb-4">À Propos</h3>
+				<p class="text-sm leading-relaxed">
+					Notre plateforme vous permet de consulter et commander des médicaments
+					en ligne auprès des pharmacies partenaires. Service disponible 24/7
+					pour votre confort.
+				</p>
+			</div>
+
+			<!-- Liens Rapides -->
+			<div>
+				<h3 class="text-white text-lg font-semibold mb-4">Liens Rapides</h3>
+				<ul class="space-y-2">
+					<li><a routerLink="/products" class="text-sm hover:text-white transition-colors">Nos Produits</a></li>
+					<li><a routerLink="/products" class="text-sm hover:text-white transition-colors">Nos Pharmacies</a></li>
+					<li><a routerLink="/assurances" class="text-sm hover:text-white transition-colors">Assurances</a></li>
+					<li><a routerLink="/faq" class="text-sm hover:text-white transition-colors">FAQ</a></li>
+					<li><a routerLink="/footer" class="text-sm hover:text-white transition-colors">Contact</a></li>
+				</ul>
+			</div>
+
+			<!-- Contact -->
+			<div>
+				<h3 class="text-white text-lg font-semibold mb-4">Contact</h3>
+				<ul class="space-y-3">
+					<li class="flex items-center space-x-3">
+						<i class="fas fa-phone"></i>
+						<span class="text-sm">+123 456 789</span>
+					</li>
+					<li class="flex items-center space-x-3">
+						<i class="fas fa-envelope"></i>
+						<span class="text-sm">contact&#64;pharmacy.com</span>
+					</li>
+					<li class="flex items-center space-x-3">
+						<i class="fas fa-map-marker-alt"></i>
+						<span class="text-sm">123 Rue de la Santé, Ville</span>
+					</li>
+					<li class="flex items-center space-x-3">
+						<i class="fas fa-clock"></i>
+						<span class="text-sm">Lun-Sam: 8h-20h</span>
+					</li>
+				</ul>
+			</div>
+
+			<!-- Newsletter -->
+			<div>
+				<h3 class="text-white text-lg font-semibold mb-4">Newsletter</h3>
+				<p class="text-sm mb-4">
+					Inscrivez-vous pour recevoir nos actualités et promotions.
+				</p>
+				<div class="flex flex-col space-y-2">
+					<input type="email" placeholder="Votre email"
+						class="px-3 py-2 bg-gray-800 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2" />
+					<button class="bg-blue-600 text-white px-4 py-2 rounded text-sm hover:bg-blue-700 transition-colors">
+						S'inscrire
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Social Media -->
+		<div class="mt-8 pt-8 border-t border-gray-800">
+			<div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+				<div class="flex space-x-6 ">
+					<a href="#" class="hover:text-white transition-colors me-2">
+						<i class="fab fa-facebook"></i>
+					</a>
+					<a href="#" class="hover:text-white transition-colors me-2">
+						<i class="fab fa-instagram"></i>
+					</a>
+					<a href="#" class="hover:text-white transition-colors">
+						<i class="fab fa-twitter"></i>
+					</a>
+				</div>
+				<div class="text-sm">
+					© {{ currentYear }} PharmaShop. Tous droits réservés.
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bottom Bar -->
+	<div class="bg-gray-950 py-4">
+		<div class="max-w-7xl mx-auto px-4 text-sm text-center md:flex md:justify-center md:space-x-8">
+			<a routerLink="/mentions-legales" class="hover:text-white transition-colors">
+				Mentions Légales
+			</a>
+			<span class="hidden md:inline">|</span>
+			<a routerLink="/confidentialite" class="hover:text-white transition-colors">
+				Politique de Confidentialité
+			</a>
+			<span class="hidden md:inline">|</span>
+			<a routerLink="/cgv" class="hover:text-white transition-colors">
+				CGV
+			</a>
+		</div>
+	</div>
+</footer>
