@@ -65,7 +65,14 @@ export class CartService {
     this.updateCartState();
     return 'Produit ajouté au panier avec succès.';
   }
-
+  // Méthode pour mettre à jour la quantité d'un article dans le panier
+  updateQuantity(productId: number, quantity: number): void {
+    const item = this.cartItems.find((i) => i.id === productId);
+    if (item) {
+      item.quantity = quantity;
+      this.updateCartState();
+    }
+  }
   /**
    * Supprime un article spécifique du panier.
    */

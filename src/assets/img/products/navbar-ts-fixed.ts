@@ -17,17 +17,17 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isLoggedIn: boolean = false;
   userName: string = '';
   UserFirstName: string = 'Utilisateur';
-
+  
   // Search related variables
   searchTerm: string = '';
-
+  
   // Cart related variables
   cartItems: CartItem[] = [];
   cartTotalQuantity: number = 0;
   cartTotal: number = 0;
   currentPharmacyId: number | null = null;
   currentPharmacyName: string = '';
-
+  
   // Modal and subscription management
   private modalInstance: any;
   private subscriptions: Subscription[] = [];
@@ -41,21 +41,21 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ) {
     // Subscribe to router events for modal management
     this.subscriptions.push(
-      this.router.events
-        .pipe(filter((event) => event instanceof NavigationEnd))
-        .subscribe(() => {
-          this.forceCleanupModal();
-        })
+      this.router.events.pipe(
+        filter(event => event instanceof NavigationEnd)
+      ).subscribe(() => {
+        this.forceCleanupModal();
+      })
     );
   }
 
   ngOnInit(): void {
     // Force cleanup any existing modal effects
     this.forceCleanupModal();
-
+    
     // Initialize modal
     this.initializeModal();
-
+    
     // Subscribe to auth status
     this.subscriptions.push(
       this.authService.isLoggedIn$.subscribe((status) => {
@@ -87,8 +87,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // Cleanup subscriptions
-    this.subscriptions.forEach((sub) => sub.unsubscribe());
-
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+    
     // Cleanup modal
     if (this.modalInstance) {
       this.modalInstance.dispose();
@@ -102,7 +102,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       // Initialize Bootstrap modal with options
       this.modalInstance = new bootstrap.Modal(this.modalElement, {
         backdrop: true,
-        keyboard: true,
+        keyboard: true
       });
 
       // Add event listener for modal hidden event
@@ -118,7 +118,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     document.body.style.removeProperty('padding-right');
     document.body.style.removeProperty('overflow');
     document.body.style.overflow = 'auto';
-
+    
     // Remove backdrop if it exists
     const backdrop = document.querySelector('.modal-backdrop');
     if (backdrop) {
@@ -176,10 +176,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   commander(): void {
     if (this.isLoggedIn && this.cartItems.length > 0) {
-      console.log(
-        'Commande passée auprès de la pharmacie :',
-        this.currentPharmacyName
-      );
+      console.log('Commande passée auprès de la pharmacie :', this.currentPharmacyName);
       this.cartService.clearCart();
       this.closeModalAndNavigate();
     }
@@ -204,7 +201,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private closeModalAndNavigate(route?: string): void {
     if (this.modalInstance) {
       this.modalInstance.hide();
-
+      
       setTimeout(() => {
         this.forceCleanupModal();
         if (route) {

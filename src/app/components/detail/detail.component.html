@@ -11,12 +11,13 @@
 				<p><strong>Disponible à : </strong>{{ pharmacy?.name }}</p>
 				<p><strong>Adresse : </strong>{{ pharmacy?.address }}</p>
 
-				<button class="btn btn-success mt-3 me-2" (click)="addToCart()">
-					<i class="fas fa-shopping-cart"></i> Ajouter au panier
-				</button>
-				<button class="btn btn-secondary mt-3" (click)="goBack()">
+				<button class="btn btn-secondary mt-3 me-2" (click)="goBack()">
 					<i class="fas fa-arrow-left"></i> Retour
 				</button>
+				<button class="btn btn-success mt-3" (click)="addToCart()">
+					<i class="fas fa-shopping-cart"></i> Ajouter au panier
+				</button>
+
 			</div>
 		</div>
 	</div>
