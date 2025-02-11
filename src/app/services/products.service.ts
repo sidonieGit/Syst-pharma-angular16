@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Product } from '../model/product';
 import { PRODUCTS } from '../model/mock-products'; // Assurez-vous d'importer les produits mockés
 import { AuthService } from './auth.service';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,10 @@ export class ProductsService {
   private searchTerm = new BehaviorSubject<string>('');
   searchTerm$ = this.searchTerm.asObservable();
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private notificationService: NotificationService
+  ) {
     this.loadProducts();
   }
 
@@ -82,6 +86,8 @@ export class ProductsService {
     product.id = lastId + 1;
     this.products.push(product);
     this.saveProducts();
+    // Remplacer l'alert par la notification
+    this.notificationService.show('Produit ajouté avec succès!', 'success');
   }
   updateProduct(updatedProduct: Product) {
     const index = this.products.findIndex((p) => p.id === updatedProduct.id);
@@ -89,6 +95,8 @@ export class ProductsService {
       this.products[index] = updatedProduct;
       this.saveProducts();
     }
+    // Remplacer l'alert par la notification
+    this.notificationService.show('Produit mis à jour avec succès!', 'success');
   }
 
   deleteProduct(id: number) {

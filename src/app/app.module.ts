@@ -17,6 +17,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { PharmacyManagementComponent } from './components/pharmacy-management/pharmacy-management.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NotificationComponent } from './components/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -32,12 +34,14 @@ import { FooterComponent } from './components/footer/footer.component';
     AdminDashboardComponent,
     PharmacyManagementComponent,
     FooterComponent,
+    NotificationComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     NgbModule,
   ],
   providers: [],

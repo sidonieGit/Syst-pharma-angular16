@@ -10,6 +10,8 @@ import { Pharmacy } from '../../model/pharmacy';
 import { Chart, ChartConfiguration } from 'chart.js/auto';
 import { AuthService, UserRole } from '../../services/auth.service';
 import { AgentPharmacie } from '../../model/agent-pharmacie';
+import { NotificationService } from '../../services/notification.service';
+import { Notification } from '../../model/notification';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -44,7 +46,8 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private pharmacyService: PharmacyService,
-    private authService: AuthService
+    private authService: AuthService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -127,9 +130,16 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
       this.authService.addAgent(this.newAgent);
       this.loadPharmacies(); // Recharger la liste
       this.resetForm();
+      this.notificationService.show(
+        'Pharmacie et agent ajoutés avec succès!',
+        'success'
+      );
     } catch (error) {
-      this.errorMessage =
-        "Erreur lors de l'ajout de la pharmacie et de l'agent";
+      // Remplacer l'alert par la notification
+      this.notificationService.show(
+        "Erreur lors de l'ajout de la pharmacie et de l'agent",
+        'error'
+      );
       console.error('Error adding pharmacy and agent:', error);
     }
   }
@@ -154,8 +164,16 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
       this.authService.updateAgent(this.newAgent); // Mettre à jour l'agent associé
       this.loadPharmacies(); // Recharger la liste
       this.resetForm();
+      this.notificationService.show(
+        'Pharmacie mise à jour avec succès!',
+        'success'
+      );
     } catch (error) {
-      this.errorMessage = 'Erreur lors de la mise à jour de la pharmacie';
+      // Remplacer l'alert par la notification
+      this.notificationService.show(
+        'Erreur lors de la mise à jour de la pharmacie',
+        'error'
+      );
       console.error('Error updating pharmacy:', error);
     }
   }

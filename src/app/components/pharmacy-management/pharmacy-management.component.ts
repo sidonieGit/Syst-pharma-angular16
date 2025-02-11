@@ -11,6 +11,7 @@ import { PharmacyService } from 'src/app/services/pharmacy.service';
 import { Observable } from 'rxjs/internal/Observable';
 import { Pharmacy } from 'src/app/model/pharmacy';
 import { map } from 'rxjs/internal/operators/map';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-pharmacy-management',
@@ -44,7 +45,8 @@ export class PharmacyManagementComponent implements OnInit {
     private productsService: ProductsService,
     private pharmacyService: PharmacyService,
     private orderService: OrderService,
-    private authService: AuthService
+    private authService: AuthService,
+    private notificationService: NotificationService
   ) {
     const currentUser = this.authService.getCurrentUser();
     if (currentUser && this.authService.isAgentPharmacie(currentUser)) {
@@ -129,14 +131,22 @@ export class PharmacyManagementComponent implements OnInit {
     this.newProduct = { ...product };
     this.showAddModal = true;
     this.editMode = true;
+    // Remplacer l'alert par la notification
+    this.notificationService.show('Produit mis à jour avec succès!', 'success');
   }
 
   deleteProduct(id: number): void {
     try {
       this.productsService.deleteProduct(id);
       this.loadProducts(); // Recharger la liste
+      // Remplacer l'alert par la notification
+      this.notificationService.show('Produit supprimé avec succès!', 'success');
     } catch (error) {
-      this.errorMessages.general = 'Erreur lors de la suppression du produit';
+      // Remplacer l'alert par la notification
+      this.notificationService.show(
+        'Erreur lors de la suppression du produit',
+        'error'
+      );
       console.error('Error deleting product:', error);
     }
   }
@@ -217,8 +227,17 @@ export class PharmacyManagementComponent implements OnInit {
     try {
       this.orderService.confirmPayment(orderId);
       this.loadOrders(); // Recharger
+      // Remplacer l'alert par la notification
+      this.notificationService.show(
+        'Paiement confirmé avec succès!',
+        'success'
+      );
     } catch (error) {
-      this.errorMessages = 'Erreur lors de la confirmation du paiement';
+      // Remplacer l'alert par la notification
+      this.notificationService.show(
+        'Erreur lors de la confirmation du paiement',
+        'error'
+      );
       console.error('Error confirming payment:', error);
     }
   }
@@ -227,8 +246,17 @@ export class PharmacyManagementComponent implements OnInit {
     try {
       this.orderService.confirmDelivery(orderId);
       this.loadOrders(); // Recharger la liste
+      // Remplacer l'alert par la notification
+      this.notificationService.show(
+        'Livraison confirmée avec succès!',
+        'success'
+      );
     } catch (error) {
-      this.errorMessages = 'Erreur lors de la confirmation de la livraison';
+      // Remplacer l'alert par la notification
+      this.notificationService.show(
+        'Erreur lors de la confirmation de la livraison',
+        'error'
+      );
       console.error('Error confirming delivery:', error);
     }
   }
