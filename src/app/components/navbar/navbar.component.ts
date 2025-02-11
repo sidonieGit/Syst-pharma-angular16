@@ -6,6 +6,7 @@ import { filter } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { CartItem, CartService } from '../../services/cart.service';
 import { ProductsService } from '../../services/medicament.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-navbar',
@@ -37,7 +38,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private cartService: CartService,
     private router: Router,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private notificationService: NotificationService
   ) {
     // Subscribe to router events for modal management
     this.subscriptions.push(
@@ -191,6 +193,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.UserFirstName = 'Utilisateur';
     this.isLoggedIn = false;
     this.router.navigate(['/']);
+    // Remplacer l'alert par la notification
+    this.notificationService.show('Déconnexion réussie!', 'success');
   }
 
   redirectToLogin(): void {

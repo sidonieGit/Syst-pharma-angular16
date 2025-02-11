@@ -5,6 +5,8 @@ import { Pharmacy } from 'src/app/model/pharmacy';
 import { CartService } from 'src/app/services/cart.service';
 import { PharmacyService } from 'src/app/services/pharmacy.service';
 import { ProductsService } from 'src/app/services/products.service'; // Importer le service des produits
+import { NotificationService } from '../../services/notification.service';
+import { Notification } from '../../model/notification';
 
 @Component({
   selector: 'app-detail',
@@ -20,8 +22,10 @@ export class DetailsComponent implements OnInit {
     private router: Router, // Ajouter Router pour la navigation
     private pharmacyService: PharmacyService,
     private cartService: CartService,
-    private productsService: ProductsService // Injection du service des produits
-  ) {}
+    private productsService: ProductsService, // Injection du service des produits
+    private notificationService: NotificationService
+  ) // Injection du service de notification
+  {}
 
   ngOnInit(): void {
     this.loadProductDetails();
@@ -75,9 +79,15 @@ export class DetailsComponent implements OnInit {
         quantity: 1,
         pharmacyId: this.product.pharmacyId,
       });
-      alert(result);
-    } else {
-      console.warn('Aucun produit sélectionné pour l’ajout au panier');
+      // Remplacer l'alert par la notification
+      if (result === 'Produit ajouté au panier avec succès.') {
+        this.notificationService.show(
+          `${this.product.name} ajouté au panier`,
+          'success'
+        );
+      } else {
+        this.notificationService.show(result, 'error');
+      }
     }
   }
 

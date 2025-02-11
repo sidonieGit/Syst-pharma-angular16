@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService, UserRole } from 'src/app/services/auth.service';
+import { NotificationService } from '../../services/notification.service';
+import { Notification } from '../../model/notification';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +23,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
   ) {}
 
   get email() {
@@ -49,7 +52,8 @@ export class LoginComponent {
 
       if (this.authService.login(email, password)) {
         const currentUser = this.authService.getCurrentUser();
-        alert('Login successful!');
+        // Remplacer l'alert par la notification
+        this.notificationService.show('Login successful!', 'success');
 
         // Vérification du rôle de l'utilisateur pour la redirection
         if (currentUser) {

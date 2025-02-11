@@ -1,0 +1,10 @@
+<!-- notification.component.html -->
+<div class="notification-stack">
+	<div *ngFor="let notification of notifications" [@fadeInOut] class="notification-container"
+		[ngClass]="notification.type">
+		{{ notification.message }}
+		<button class="close-button" (click)="removeNotification(notification.id)">
+			×
+		</button>
+	</div>
+</div>

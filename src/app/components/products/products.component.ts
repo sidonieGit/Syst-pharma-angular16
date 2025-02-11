@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { CartService } from '../../services/cart.service';
 import { ProductsService } from '../../services/medicament.service';
 import { PharmacyService } from '../../services/pharmacy.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-products',
@@ -27,7 +28,8 @@ export class ProductsComponent implements OnInit {
     private authService: AuthService,
     private cartService: CartService,
     private productsService: ProductsService,
-    private pharmacyService: PharmacyService
+    private pharmacyService: PharmacyService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -86,7 +88,16 @@ export class ProductsComponent implements OnInit {
       quantity: 1,
       pharmacyId: product.pharmacyId,
     });
-    alert(result);
+
+    // Remplacer l'alert par la notification
+    if (result === 'Produit ajouté au panier avec succès.') {
+      this.notificationService.show(
+        `${product.name} ajouté au panier`,
+        'success'
+      );
+    } else {
+      this.notificationService.show(result, 'error');
+    }
   }
 
   selectCategory(categoryId: number | null) {
