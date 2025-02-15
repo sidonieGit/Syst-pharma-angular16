@@ -18,7 +18,7 @@ export class ProductsService {
   }
   /**
    *
-   * @param term
+   * @param term terme de recherche
    */
   setSearchTerm(term: string) {
     this.searchTerm.next(term);

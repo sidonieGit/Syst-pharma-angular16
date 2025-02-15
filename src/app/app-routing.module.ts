@@ -11,6 +11,7 @@ import { authGuard } from './guards/auth.guard';
 import { UserRole } from './services/auth.service';
 import { FooterComponent } from './components/footer/footer.component';
 
+// Déclaration des routes de l'application
 const routes: Routes = [
   // {
   //   path: '',
@@ -53,6 +54,7 @@ const routes: Routes = [
   { path: 'footer', component: FooterComponent },
 ];
 
+// Configuration du module de routage
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
