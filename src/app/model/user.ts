@@ -5,7 +5,7 @@ export class User {
   phone: string = '';
   password: string = '';
   role: 'Admin' | 'Agent' | 'Client';
-
+  // définition de l'interface User
   constructor(
     firstName: string,
     lastName: string,

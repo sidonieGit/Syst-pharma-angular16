@@ -26,7 +26,7 @@ export class PharmacyService {
   constructor() {
     this.initializePharmacies();
   }
-
+  // Renvoie toutes les pharmacies disponibles
   private initializePharmacies(): void {
     const storedPharmacies = localStorage.getItem(this.STORAGE_KEY);
     if (!storedPharmacies) {
@@ -43,7 +43,10 @@ export class PharmacyService {
     }
     return JSON.parse(storedPharmacies);
   }
-
+  /**
+   *
+   * @param pharmacy Pharmacie à ajouter
+   */
   addPharmacy(pharmacy: Pharmacy): void {
     console.log('Adding pharmacy:', pharmacy);
     const pharmacies = this.getPharmacies();
@@ -64,7 +67,10 @@ export class PharmacyService {
       this.savePharmacies(pharmacies);
     }
   }
-
+  /**
+   *
+   * @param id Pharmacie à supprimer
+   */
   deletePharmacy(id: number): void {
     const pharmacies = this.getPharmacies();
     const updatedPharmacies = pharmacies.filter((p) => p.id !== id);

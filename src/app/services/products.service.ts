@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Product } from '../model/product';
-import { PRODUCTS } from '../model/mock-products'; // Assurez-vous d'importer les produits mockés
+import { PRODUCTS } from '../model/mock-products';
 import { AuthService } from './auth.service';
 import { NotificationService } from './notification.service';
 
@@ -53,7 +53,7 @@ export class ProductsService {
 
     return allProducts;
   }
-
+  // Renvoie les produits filtrés en fonction du terme de recherche
   getProductsForCurrentPharmacy(): Product[] {
     const pharmacyId = this.authService.getCurrentPharmacyId();
     if (!pharmacyId) {
@@ -61,7 +61,11 @@ export class ProductsService {
     }
     return this.products.filter((product) => product.pharmacyId === pharmacyId);
   }
-
+  /**
+   *
+   * @param pharmacyId
+   * @returns
+   */
   getProducts(pharmacyId: number): Product[] {
     return this.products.filter((product) => product.pharmacyId === pharmacyId);
   }
@@ -76,6 +80,10 @@ export class ProductsService {
   //   this.products.push(product);
   //   this.saveProducts();
   // }
+  /**
+   *
+   * @param product Produit à ajouter
+   */
   addProduct(product: Product) {
     const pharmacyId = this.authService.getCurrentPharmacyId();
     if (!pharmacyId) {
@@ -89,6 +97,10 @@ export class ProductsService {
     // Remplacer l'alert par la notification
     this.notificationService.show('Produit ajouté avec succès!', 'success');
   }
+  /**
+   *
+   * @param product Produit à modifier
+   */
   updateProduct(updatedProduct: Product) {
     const index = this.products.findIndex((p) => p.id === updatedProduct.id);
     if (index !== -1) {
@@ -98,7 +110,10 @@ export class ProductsService {
     // Remplacer l'alert par la notification
     this.notificationService.show('Produit mis à jour avec succès!', 'success');
   }
-
+  /**
+   *
+   * @param id Produit à supprimer
+   */
   deleteProduct(id: number) {
     this.products = this.products.filter((p) => p.id !== id);
     this.saveProducts();
