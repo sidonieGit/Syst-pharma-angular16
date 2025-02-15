@@ -1,39 +1,39 @@
-<!-- Deuxième Menu -->
+<!-- nav.component.html -->
 <div class="cc-navbar navbar navbar-expand-lg w-100 navbar-dark bg-secondary shadow-lg second-menu">
 	<div class="container-fluid">
-		<!-- Toggler button (mobile view) -->
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent2"
-			aria-controls="navbarContent2" aria-expanded="false" aria-label="Toggle navigation">
+		<!-- Bouton toggler pour mobile -->
+		<button class="navbar-toggler" type="button" (click)="navService.toggleNavbar()"
+			[attr.aria-expanded]="navService.isExpanded$ | async">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
-		<!-- Navbar content -->
-		<div class="collapse navbar-collapse justify-content-center" id="navbarContent2">
+		<!-- Contenu de la navbar avec la classe "show" ajoutée dynamiquement -->
+		<div class="collapse navbar-collapse justify-content-center" id="navbarContent2"
+			[ngClass]="{'show': navService.isExpanded$ | async}">
 			<ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-5">
 				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" routerLink="/">Accueil</a>
+					<a class="nav-link active" aria-current="page" routerLink="/"
+						(click)="navService.collapseNavbar()">Accueil</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" routerLink="/products">Produits</a>
+					<a class="nav-link" routerLink="/products" (click)="navService.collapseNavbar()">Produits</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" routerLink="/Assurances">Assurances</a>
+					<a class="nav-link" routerLink="/Assurances" (click)="navService.collapseNavbar()">Assurances</a>
 				</li>
-				<!-- Aide Dropdown avec ngbDropdown -->
 				<li class="nav-item dropdown" ngbDropdown>
 					<a class="nav-link dropdown-toggle" id="aideDropdown" role="button" ngbDropdownToggle>
 						<i class="bi bi-question-circle"></i> Aide
 					</a>
 					<div class="dropdown-menu" aria-labelledby="aideDropdown" ngbDropdownMenu>
-						<a class="dropdown-item" routerLink="/Questions">
+						<a class="dropdown-item" routerLink="/Questions" (click)="navService.collapseNavbar()">
 							<i class="bi bi-info-circle"></i> Questions fréquentes
 						</a>
-						<a class="dropdown-item" routerLink="/Contact">
+						<a class="dropdown-item" routerLink="/Contact" (click)="navService.collapseNavbar()">
 							<i class="bi bi-envelope"></i> Nous contacter
 						</a>
 					</div>
 				</li>
-
 			</ul>
 		</div>
 	</div>
