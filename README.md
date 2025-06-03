@@ -1,27 +1,60 @@
-# SystPharmaAngular16
+💊 SysPharma – Gestion Pharmaceutique (Angular 16)
+SysPharma est une application web de gestion des opérations d’une pharmacie, développée avec Angular 16. Elle permet la gestion des stocks de médicaments, des ventes, des fournisseurs et des utilisateurs.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+Ce projet a été conçu dans le cadre d’une formation ou d’un usage professionnel, et montre la maîtrise des concepts Angular modernes (components, services, routing, forms, HTTP, localStorage...).
 
-## Development server
+🚀 Fonctionnalités principales
+✅ Gestion des médicaments : ajout, modification, suppression, stock, alertes.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+✅ Gestion des ventes : enregistrement des ventes, historique.
 
-## Code scaffolding
+✅ Gestion des fournisseurs : carnet de fournisseurs avec contacts.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+✅ Gestion des utilisateurs : interface login / logout / protection des routes.
 
-## Build
+✅ Tableaux dynamiques avec pagination, recherche, tri.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+✅ Formulaires réactifs et validation.
 
-## Running unit tests
+✅ Stockage persistant via localStorage ou intégration API backend.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+🧱 Tech Stack
+- Technologie	Description
+- Angular 16	Framework front-end moderne
+- TypeScript	Langage fort typé
+- Bootstrap 5	Design responsive et composants UI
+- RxJS	Programmation réactive
+- LocalStorage	Persistance locale (mock API)
+- Angular CLI	Outils de développement Angular
 
-## Running end-to-end tests
+📦 Structure du projet
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+src/
+│
+├── app/
+│   ├── components/      # Composants UI (navbar, sidebar...)
+│   ├── pages/           # Pages principales (médicaments, ventes...)
+│   ├── services/        # Services Angular pour logique métier
+│   ├── models/          # Interfaces TypeScript
+│   └── app-routing.ts   # Configuration des routes
+│
+├── assets/              # Images, styles custom
+├── environments/        # Environnements dev/prod
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+🖥️ Aperçu du projet
+https://syst-pharma-angular16-iz8woxsfm-sidonies-projects-85b20d5e.vercel.app/ 
+
+
+⚙️ Installation et lancement
+
+# Cloner le projet
+git clone https://github.com/votre-utilisateur/syspharma.git
+cd syspharma
+
+# Installer les dépendances
+npm install
+
+# Lancer l'application
+ng serve
+Accéder à : http://localhost:4200
